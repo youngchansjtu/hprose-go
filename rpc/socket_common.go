@@ -26,12 +26,23 @@ import (
 
 	hio "github.com/hprose/hprose-golang/io"
 	"github.com/hprose/hprose-golang/util"
+	"encoding/binary"
 )
 
 type packet struct {
 	fullDuplex bool
 	id         [4]byte
 	body       []byte
+}
+
+
+func newPacket(fd bool, pktId uint32, data []byte) *packet {
+	pkt := &packet{
+		fullDuplex:fd,
+		body:data,
+	}
+	binary.LittleEndian.PutUint32(pkt.id[:], pktId)
+	return pkt
 }
 
 type socketResponse struct {

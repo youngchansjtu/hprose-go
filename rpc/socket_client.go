@@ -46,7 +46,8 @@ type SocketClient struct {
 
 func (client *SocketClient) initSocketClient() {
 	client.InitBaseClient()
-	client.socketTransport = newHalfDuplexSocketTransport()
+	client.socketTransport = newFullDuplexSocketTransport()
+	//client.socketTransport = newHalfDuplexSocketTransport()
 	client.ReadBuffer = 0
 	client.WriteBuffer = 0
 	client.TLSConfig = nil
